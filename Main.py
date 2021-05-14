@@ -46,16 +46,27 @@ def Sign_Up():
         Username = str(input("\tUsername\t: "))
         Password = str(input("\tPassword\t: "))
         Kontak   = str(input("\tNo Telepon\t: "))
-        perintah = f'insert into pembeli values (\'{Kontak}\',\'{Username}\',\'{Password}\')'
-        mycursor.execute(perintah)
-        mydb.commit()
-        loop = False
+        mycursor.execute("select username from pembeli where username = '"+Username+"'")
+        result = mycursor.fetchall()
+        if (not Username) or (not Password) or (not Kontak):
+            print("Silahkan isi semua data yang dibutuhkan!")
+            pause()
+            clear()
+        elif result:
+            print("Username telah ada!")
+            pause()
+            clear()
+        else:
+            perintah = f'insert into pembeli values (\'{Kontak}\',\'{Username}\',\'{Password}\')'
+            mycursor.execute(perintah)
+            mydb.commit()
+            loop = False
 
 def Main():
     loop = True
     while loop:
         try:
-            Option = int(input("Pilih Menu di Bawah\n 1.Sign In | 2.Sign Up\n>"))
+            Option = int(input("Pilih Menu di Bawah\n 1.Sign In | 2.Sign Up\n> "))
             if Option == 1:
                 loop = False
                 clear()
