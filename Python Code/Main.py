@@ -5,6 +5,7 @@ import Lihat_Tiket
 import Ajukan_Keluhan
 import Lihat_Keluhan
 
+#Inisilasi
 clear = lambda: os.system('cls')
 pause = lambda: os.system('pause')
 
