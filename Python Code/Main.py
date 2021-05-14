@@ -1,6 +1,4 @@
 import mysql.connector
-import string
-import random
 import os
 import Beli_Tiket
 import Lihat_Tiket
