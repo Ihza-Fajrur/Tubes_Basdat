@@ -39,7 +39,16 @@ def Login():
             print("Username atau Password Salah!")
 
 def Sign_Up():
-    pass
+    loop = True
+    while loop:
+        print("Sign In")
+        print("Harap inputkan data-data dibawah ini")
+        Username = str(input("\tUsername\t: "))
+        Password = str(input("\tPassword\t: "))
+        Kontak   = str(input("\tNo Telepon\t: "))
+        masuk = (Username,Password,Kontak)
+        perintah = "Insert into Pembeli values (%s)"
+        mycursor.execute(perintah,masuk)
 
 def Main():
     loop = True
@@ -60,4 +69,3 @@ def Main():
             print("Harap masukkan integer")
 
 Main()
-
