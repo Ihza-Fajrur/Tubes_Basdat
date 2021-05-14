@@ -1,0 +1,1 @@
+Print("Ihza Goblok")
