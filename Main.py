@@ -2,6 +2,10 @@ import mysql.connector
 import string
 import random
 import os
+import Beli_Tiket
+import Lihat_Tiket
+import Ajukan_Keluhan
+import Lihat_Keluhan
 
 clear = lambda: os.system('cls')
 pause = lambda: os.system('pause')
@@ -14,6 +18,31 @@ mydb = mysql.connector.connect(
 
 mycursor = mydb.cursor()
 
+def Menu():
+    loop = True
+    while loop:
+        try:
+            Option = int(input("Pilih Menu di Bawah\n 1.Beli Tiket | 2.Lihat Tiket | 3.Ajukan Keluhan | 4.Lihat Tanggapan Keluhan\n> "))
+            if Option == 1:
+                loop = False
+                clear()
+                Beli_Tiket.Main()
+            elif Option == 2:
+                loop = False
+                clear()
+                Lihat_Tiket.Main()
+            elif Option == 3:
+                loop = False
+                clear()
+                Ajukan_Keluhan.Main()
+            elif Option == 4:
+                loop = False
+                clear()
+                Lihat_Keluhan.Main()
+            else:
+                print("Inputan salah!")
+        except ValueError:
+            print("Harap masukkan integer")
 
 def Login():
     loop = True
@@ -34,7 +63,7 @@ def Login():
             print("Anda Berhasil Login!")
             pause()
             clear()
-            #pergi ke menu()
+            Menu()
         else:
             print("Username atau Password Salah!")
 
@@ -61,6 +90,10 @@ def Sign_Up():
             mycursor.execute(perintah)
             mydb.commit()
             loop = False
+            print("Selamat akun Anda telah dibuat!, Anda akan diarahkan ke halaman Sign In")
+            pause()
+            Login()
+
 
 def Main():
     loop = True
@@ -79,5 +112,4 @@ def Main():
                 print("Inputan salah!")
         except ValueError:
             print("Harap masukkan integer")
-
 Main()
