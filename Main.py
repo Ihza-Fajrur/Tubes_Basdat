@@ -41,14 +41,15 @@ def Login():
 def Sign_Up():
     loop = True
     while loop:
-        print("Sign In")
+        print("Sign Up")
         print("Harap inputkan data-data dibawah ini")
         Username = str(input("\tUsername\t: "))
         Password = str(input("\tPassword\t: "))
         Kontak   = str(input("\tNo Telepon\t: "))
-        masuk = (Username,Password,Kontak)
-        perintah = "Insert into Pembeli values (%s)"
-        mycursor.execute(perintah,masuk)
+        perintah = f'insert into pembeli values (\'{Kontak}\',\'{Username}\',\'{Password}\')'
+        mycursor.execute(perintah)
+        mydb.commit()
+        loop = False
 
 def Main():
     loop = True
