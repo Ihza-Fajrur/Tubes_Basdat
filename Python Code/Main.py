@@ -17,6 +17,10 @@ mydb = mysql.connector.connect(
 
 mycursor = mydb.cursor()
 
+class Current_User:
+    def __init__(self,Username):
+        self.Username = Username
+
 def Menu():
     loop = True
     while loop:
@@ -25,19 +29,19 @@ def Menu():
             if Option == 1:
                 loop = False
                 clear()
-                Beli_Tiket.Main()
+                Beli_Tiket.Main(Current_User.Username)
             elif Option == 2:
                 loop = False
                 clear()
-                Lihat_Tiket.Main()
+                Lihat_Tiket.Main(Current_User.Username)
             elif Option == 3:
                 loop = False
                 clear()
-                Ajukan_Keluhan.Main()
+                Ajukan_Keluhan.Main(Current_User.Username)
             elif Option == 4:
                 loop = False
                 clear()
-                Lihat_Keluhan.Main()
+                Lihat_Keluhan.Main(Current_User.Username)
             else:
                 print("Inputan salah!")
         except ValueError:
@@ -60,6 +64,7 @@ def Login():
         if result == Password:
             loop = False
             print("Anda Berhasil Login!")
+            User = Current_User(Username)
             pause()
             clear()
             Menu()
