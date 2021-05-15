@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 15 Bulan Mei 2021 pada 06.50
--- Versi server: 10.4.18-MariaDB
--- Versi PHP: 8.0.3
+-- Generation Time: May 15, 2021 at 05:16 PM
+-- Server version: 10.4.18-MariaDB
+-- PHP Version: 8.0.3
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,7 +24,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `cs`
+-- Table structure for table `cs`
 --
 
 CREATE TABLE `cs` (
@@ -33,7 +33,7 @@ CREATE TABLE `cs` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `cs`
+-- Dumping data for table `cs`
 --
 
 INSERT INTO `cs` (`id_cs`, `nama_cs`) VALUES
@@ -44,21 +44,28 @@ INSERT INTO `cs` (`id_cs`, `nama_cs`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `keluhan`
+-- Table structure for table `keluhan`
 --
 
 CREATE TABLE `keluhan` (
   `no_tiket_keluhan` varchar(10) NOT NULL,
-  `Usename` varchar(20) NOT NULL,
+  `Username` varchar(20) NOT NULL,
   `Isi_keluhan` varchar(1000) NOT NULL,
   `Balasan` varchar(1000) NOT NULL,
   `ID_CS` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `keluhan`
+--
+
+INSERT INTO `keluhan` (`no_tiket_keluhan`, `Username`, `Isi_keluhan`, `Balasan`, `ID_CS`) VALUES
+('101589', 'Ihza', 'Testing_3', '', 'BM154L');
+
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `pembeli`
+-- Table structure for table `pembeli`
 --
 
 CREATE TABLE `pembeli` (
@@ -67,10 +74,17 @@ CREATE TABLE `pembeli` (
   `Password` varchar(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `pembeli`
+--
+
+INSERT INTO `pembeli` (`kontak`, `Username`, `Password`) VALUES
+('0812', 'Ihza', '0');
+
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `penjualan_tiket`
+-- Table structure for table `penjualan_tiket`
 --
 
 CREATE TABLE `penjualan_tiket` (
@@ -82,7 +96,7 @@ CREATE TABLE `penjualan_tiket` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `petugas`
+-- Table structure for table `petugas`
 --
 
 CREATE TABLE `petugas` (
@@ -91,7 +105,7 @@ CREATE TABLE `petugas` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `petugas`
+-- Dumping data for table `petugas`
 --
 
 INSERT INTO `petugas` (`Id_petugas`, `Nama_Petugas`) VALUES
@@ -105,7 +119,7 @@ INSERT INTO `petugas` (`Id_petugas`, `Nama_Petugas`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `ticketer`
+-- Table structure for table `ticketer`
 --
 
 CREATE TABLE `ticketer` (
@@ -114,7 +128,7 @@ CREATE TABLE `ticketer` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `ticketer`
+-- Dumping data for table `ticketer`
 --
 
 INSERT INTO `ticketer` (`id_ticketer`, `nama_ticketer`) VALUES
@@ -125,7 +139,7 @@ INSERT INTO `ticketer` (`id_ticketer`, `nama_ticketer`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tiket`
+-- Table structure for table `tiket`
 --
 
 CREATE TABLE `tiket` (
@@ -143,27 +157,27 @@ CREATE TABLE `tiket` (
 --
 
 --
--- Indeks untuk tabel `cs`
+-- Indexes for table `cs`
 --
 ALTER TABLE `cs`
   ADD PRIMARY KEY (`id_cs`);
 
 --
--- Indeks untuk tabel `keluhan`
+-- Indexes for table `keluhan`
 --
 ALTER TABLE `keluhan`
   ADD PRIMARY KEY (`no_tiket_keluhan`),
-  ADD KEY `Usename` (`Usename`),
+  ADD KEY `Usename` (`Username`),
   ADD KEY `ID_CS` (`ID_CS`);
 
 --
--- Indeks untuk tabel `pembeli`
+-- Indexes for table `pembeli`
 --
 ALTER TABLE `pembeli`
   ADD PRIMARY KEY (`Username`);
 
 --
--- Indeks untuk tabel `penjualan_tiket`
+-- Indexes for table `penjualan_tiket`
 --
 ALTER TABLE `penjualan_tiket`
   ADD PRIMARY KEY (`no_penjualan`),
@@ -171,29 +185,29 @@ ALTER TABLE `penjualan_tiket`
   ADD KEY `Username` (`Username`);
 
 --
--- Indeks untuk tabel `petugas`
+-- Indexes for table `petugas`
 --
 ALTER TABLE `petugas`
   ADD PRIMARY KEY (`Id_petugas`);
 
 --
--- Indeks untuk tabel `ticketer`
+-- Indexes for table `ticketer`
 --
 ALTER TABLE `ticketer`
   ADD PRIMARY KEY (`id_ticketer`);
 
 --
--- Indeks untuk tabel `tiket`
+-- Indexes for table `tiket`
 --
 ALTER TABLE `tiket`
   ADD PRIMARY KEY (`no_penjualan`,`no_tiket`);
 
 --
--- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
+-- Constraints for dumped tables
 --
 
 --
--- Ketidakleluasaan untuk tabel `cs`
+-- Constraints for table `cs`
 --
 ALTER TABLE `cs`
   ADD CONSTRAINT `cs_ibfk_1` FOREIGN KEY (`id_cs`) REFERENCES `petugas` (`Id_petugas`) ON DELETE CASCADE,
@@ -205,27 +219,27 @@ ALTER TABLE `cs`
   ADD CONSTRAINT `cs_ibfk_7` FOREIGN KEY (`id_cs`) REFERENCES `petugas` (`Id_petugas`) ON UPDATE CASCADE;
 
 --
--- Ketidakleluasaan untuk tabel `keluhan`
+-- Constraints for table `keluhan`
 --
 ALTER TABLE `keluhan`
-  ADD CONSTRAINT `keluhan_ibfk_1` FOREIGN KEY (`Usename`) REFERENCES `pembeli` (`Username`) ON DELETE CASCADE,
+  ADD CONSTRAINT `keluhan_ibfk_1` FOREIGN KEY (`Username`) REFERENCES `pembeli` (`Username`) ON DELETE CASCADE,
   ADD CONSTRAINT `keluhan_ibfk_2` FOREIGN KEY (`ID_CS`) REFERENCES `cs` (`id_cs`) ON DELETE CASCADE;
 
 --
--- Ketidakleluasaan untuk tabel `penjualan_tiket`
+-- Constraints for table `penjualan_tiket`
 --
 ALTER TABLE `penjualan_tiket`
   ADD CONSTRAINT `penjualan_tiket_ibfk_1` FOREIGN KEY (`id_ticketer`) REFERENCES `ticketer` (`id_ticketer`) ON DELETE CASCADE,
   ADD CONSTRAINT `penjualan_tiket_ibfk_2` FOREIGN KEY (`Username`) REFERENCES `pembeli` (`Username`) ON DELETE CASCADE;
 
 --
--- Ketidakleluasaan untuk tabel `ticketer`
+-- Constraints for table `ticketer`
 --
 ALTER TABLE `ticketer`
   ADD CONSTRAINT `ticketer_ibfk_3` FOREIGN KEY (`id_ticketer`) REFERENCES `petugas` (`Id_petugas`) ON DELETE CASCADE;
 
 --
--- Ketidakleluasaan untuk tabel `tiket`
+-- Constraints for table `tiket`
 --
 ALTER TABLE `tiket`
   ADD CONSTRAINT `tiket_ibfk_1` FOREIGN KEY (`no_penjualan`) REFERENCES `penjualan_tiket` (`no_penjualan`) ON DELETE CASCADE ON UPDATE CASCADE;
