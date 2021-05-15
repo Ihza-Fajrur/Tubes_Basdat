@@ -21,7 +21,10 @@ class Current_User:
     def __init__(self,Username):
         self.Username = Username
 
-def Menu():
+    def Import_Username(self):
+        return self.Username
+
+def Menu(User):
     loop = True
     while loop:
         try:
@@ -29,19 +32,19 @@ def Menu():
             if Option == 1:
                 loop = False
                 clear()
-                Beli_Tiket.Main(Current_User.Username)
+                Beli_Tiket.Main()
             elif Option == 2:
                 loop = False
                 clear()
-                Lihat_Tiket.Main(Current_User.Username)
+                Lihat_Tiket.Main()
             elif Option == 3:
                 loop = False
                 clear()
-                Ajukan_Keluhan.Main(Current_User.Username)
+                Ajukan_Keluhan.Main(User.Import_Username())
             elif Option == 4:
                 loop = False
                 clear()
-                Lihat_Keluhan.Main(Current_User.Username)
+                Lihat_Keluhan.Main(User.Import_Username())
             else:
                 print("Inputan salah!")
         except ValueError:
@@ -67,7 +70,7 @@ def Login():
             User = Current_User(Username)
             pause()
             clear()
-            Menu()
+            Menu(User)
         else:
             print("Username atau Password Salah!")
 
@@ -96,6 +99,7 @@ def Sign_Up():
             loop = False
             print("Selamat akun Anda telah dibuat!, Anda akan diarahkan ke halaman Sign In")
             pause()
+            clear()
             Login()
 
 
@@ -116,4 +120,7 @@ def Main():
                 print("Inputan salah!")
         except ValueError:
             print("Harap masukkan integer")
-Main()
+
+if __name__ == "__main__":
+    clear()
+    Main()
