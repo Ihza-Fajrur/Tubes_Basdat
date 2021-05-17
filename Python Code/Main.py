@@ -36,7 +36,7 @@ def Menu(User):
             elif Option == 2:
                 loop = False
                 clear()
-                Lihat_Tiket.Main()
+                Lihat_Tiket.Main(User.Import_Username())
             elif Option == 3:
                 loop = False
                 clear()
