@@ -48,6 +48,7 @@ def Beli_Tiket(User):
         elif len(tahun)!=4:
             print("Inputan salah tahun salah")
             pause()
+            clear()
             Beli_Tiket(User)
         if len(bulan)==1:
             bulan='0'+str(bulan)
@@ -56,7 +57,7 @@ def Beli_Tiket(User):
         tgl = tahun+'-'+bulan+'-'+tgl
         harga = hitungHarga(asal,tujuan)
         clear()
-        print(f'Tiket perjalanan\nDari\t: {asal}\nMenuju\t: {tujuan}\nHarga\t: {harga}\nPada\t: {tgl}')
+        print(f'Tiket perjalanan\nDari\t: {kota[asal][0]}\nMenuju\t: {kota[tujuan][0]}\nHarga\t: {harga}\nPada\t: {tgl}')
         loop_2 = True
         while loop_2:
             try:
@@ -104,7 +105,7 @@ def Beli_Tiket(User):
             sql_insert_blob_query = """INSERT INTO tiket
                            (no_tiket, no_booking, asal, tujuan, harga, no_penjualan, tgl_keberangkatan)VALUES (%s,%s,%s,%s,%s,%s,%s)"""
 
-            datanya = (no_tiket,no_booking,asal,tujuan,harga,no_penjualan,tgl)
+            datanya = (no_tiket,no_booking,kota[asal][0],kota[tujuan][0],harga,no_penjualan,tgl)
             result = mycursor.execute(sql_insert_blob_query,datanya)
             mydb.commit()
         except mysql.connector.Error as error:
