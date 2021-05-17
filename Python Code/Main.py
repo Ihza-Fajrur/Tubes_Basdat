@@ -28,11 +28,11 @@ def Menu(User):
     loop = True
     while loop:
         try:
-            Option = int(input("Pilih Menu di Bawah\n 1.Beli Tiket | 2.Lihat Tiket | 3.Ajukan Keluhan | 4.Lihat Tanggapan Keluhan\n> "))
+            Option = int(input("Pilih Menu di Bawah\n 1.Beli Tiket | 2.Lihat Tiket | 3.Ajukan Keluhan | 4.Lihat Tanggapan Keluhan | 5.Log Out\n> "))
             if Option == 1:
                 loop = False
                 clear()
-                Beli_Tiket.Main()
+                Beli_Tiket.Main(User.Import_Username())
             elif Option == 2:
                 loop = False
                 clear()
@@ -45,6 +45,12 @@ def Menu(User):
                 loop = False
                 clear()
                 Lihat_Keluhan.Main(User.Import_Username())
+            elif Option == 5:
+                loop = False
+                print("Terima Kasih")
+                pause()
+                clear()
+                Main()
             else:
                 print("Inputan salah!")
         except ValueError:
@@ -107,7 +113,7 @@ def Main():
     loop = True
     while loop:
         try:
-            Option = int(input("Pilih Menu di Bawah\n 1.Sign In | 2.Sign Up\n> "))
+            Option = int(input("Pilih Menu di Bawah\n 1.Sign In | 2.Sign Up | 3.Tutup Aplikasi\n> "))
             if Option == 1:
                 loop = False
                 clear()
@@ -116,10 +122,18 @@ def Main():
                 loop = False
                 clear()
                 Sign_Up()
+            elif Option == 3:
+                loop = False
+                print("Sampai jumpa!")
             else:
                 print("Inputan salah!")
         except ValueError:
             print("Harap masukkan integer")
+
+def DariLuar(Username):
+    User = Current_User(Username)
+    clear()
+    Menu(User)
 
 if __name__ == "__main__":
     clear()

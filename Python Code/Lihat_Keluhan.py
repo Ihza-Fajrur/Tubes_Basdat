@@ -41,8 +41,16 @@ def List_Keluhan(User):
     print("\nAnda akan diarahkan ke Menu Utama")
     pause()
     clear()
-        
+    KeMenuUtama(User.Username)
+
+def KeMenuUtama(Username):
+    from Main import DariLuar
+    DariLuar(Username)
 
 def Main(Username):
     User = Current_User(Username)
     List_Keluhan(User)
+
+if __name__ == "__main__":
+    clear()
+    Main("Ihza")
