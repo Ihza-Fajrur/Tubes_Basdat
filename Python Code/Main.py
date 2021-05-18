@@ -24,11 +24,16 @@ class Current_User:
     def Import_Username(self):
         return self.Username
 
-def Menu(User):
+def Menu(User,Admin):
     loop = True
     while loop:
         try:
-            Option = int(input("Pilih Menu di Bawah\n 1.Beli Tiket | 2.Lihat Tiket | 3.Ajukan Keluhan | 4.Lihat Tanggapan Keluhan | 5.Log Out\n> "))
+            #menu
+            if !(Admin):
+                Option = int(input("Pilih Menu di Bawah\n 1.Beli Tiket | 2.Lihat Tiket | 3.Ajukan Keluhan | 4.Lihat Tanggapan Keluhan | 5.Log Out\n> "))
+            else :
+                Option = int(input("Pilih Menu di Bawah\n 1.Beli Tiket | 2.Lihat Tiket | 3.Ajukan Keluhan | 4.Lihat Tanggapan Keluhan | 5.Log Out | 6. Tampilkan Graph\n> "))
+            #pilih menu
             if Option == 1:
                 loop = False
                 clear()
@@ -51,6 +56,10 @@ def Menu(User):
                 pause()
                 clear()
                 Main()
+            elif admin:
+                if Option == 6:
+                    loop = False
+                    Tampilkan_Graph()
             else:
                 print("Inputan salah!")
         except ValueError:
@@ -65,10 +74,13 @@ def Login():
         Password = str(input("\tPassword\t: "))
         if not (Username and Password):
             print("Username dan Password tidak dapat dikosongkan")
+        admin = 0
         mycursor.execute("Select password from pembeli where Username  = '" + Username + "\'")
         result = mycursor.fetchall()
         if not result:
-            print("Username atau Password Salah!")
+            mycursor.execute("Select Id_petugas from petugas where Nama_Petugas  = '" + Username + "\'")
+            result = mycursor.fetchall()
+            admin = 1
         result = (result[0])[0]
         if result == Password:
             loop = False
@@ -76,7 +88,7 @@ def Login():
             User = Current_User(Username)
             pause()
             clear()
-            Menu(User)
+            Menu(User,admin)
         else:
             print("Username atau Password Salah!")
 

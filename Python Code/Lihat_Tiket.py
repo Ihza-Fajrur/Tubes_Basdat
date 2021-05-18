@@ -24,9 +24,6 @@ def List_tiket(User):
     result = mycursor.fetchall()
 
     x = PrettyTable(["No. Tiket", "No. Booking", "Asal", "Tujuan","Tanggal Keberangkatan","Harga"])
-    # x.set_field_align("No. Tiket", "l") # Left align city names
-    # x.set_padding_width(1) # One space between column edges and contents (default)
-
     for j in result:
         x.add_row(j)
     print(x)
