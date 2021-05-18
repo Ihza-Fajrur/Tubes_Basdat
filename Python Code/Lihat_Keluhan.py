@@ -19,7 +19,7 @@ class Current_User:
         self.Username = Username
 
 
-def List_Keluhan(User):
+def List_Keluhan(User,Admin):
     clear()
     Keluhan = []
     No_tiket_Keluhan = []
@@ -28,33 +28,29 @@ def List_Keluhan(User):
     order = f'select no_tiket_keluhan,Isi_keluhan,ID_CS,Balasan from keluhan where Username = \'{User.Username}\''
     mycursor.execute(order)
     result = mycursor.fetchall()
+    text = "Keluhan anda belum dibalas, Keluhan anda akan dibalas dalam 3x24 Jam"
     for x in range(len(result)):
-        No_tiket_Keluhan.append(result[x][0])
-        Keluhan.append(result[x][1])
-        ID_CS.append(result[x][2])
         if result[x][3] == "":
-            Balasan.append("Keluhan anda belum dibalas, Keluhan anda akan dibalas dalam waktu 1x24 Jam")
-        else:
-            Balasan.append(result[x][3])
+            order = f'update keluhan set Balasan = \'{text}\' where keluhan.no_tiket_keluhan = \'{result[x][0]}\''
+            mycursor.execute(order)
+            mydb.commit()
     print("List Keluhan Anda:")
-    print("No Tiket Keluhan\t| Isi Keluhan\t| ID CS\t\t| Balasan")
-    # a = PrettyTable(["No. Tiket", "No. Booking", "Asal", "Tujuan","Tanggal Keberangkatan","Harga"])
-    for i in range(len(result)):
-        print(No_tiket_Keluhan[i], "\t\t\t| ", Keluhan[i], "\t| ",ID_CS[i], "\t| ",Balasan[i])
-    # for y in result:
-    #     a.add_row(y)
+    a = PrettyTable(["No. Tiket Keluhan", "Isi Keluhan", "ID Customer Service", "Balasan"])
+    for y in result:
+        a.add_row(y)
+    print(a)
     print("\nAnda akan diarahkan ke Menu Utama")
     pause()
     clear()
-    KeMenuUtama(User.Username)
+    KeMenuUtama(User.Username,Admin)
 
-def KeMenuUtama(Username):
+def KeMenuUtama(Username,Admin):
     from Main import DariLuar
-    DariLuar(Username)
+    DariLuar(Username,Admin)
 
-def Main(Username):
+def Main(Username,Admin):
     User = Current_User(Username)
-    List_Keluhan(User)
+    List_Keluhan(User,Admin)
 
 if __name__ == "__main__":
     clear()
