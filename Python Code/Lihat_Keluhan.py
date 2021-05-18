@@ -1,6 +1,7 @@
 import os
 import mysql.connector
 import random
+from prettytable import PrettyTable
 
 #Inisilasi
 clear = lambda: os.system('cls')
@@ -19,6 +20,7 @@ class Current_User:
 
 
 def List_Keluhan(User):
+    clear()
     Keluhan = []
     No_tiket_Keluhan = []
     ID_CS = []
@@ -36,8 +38,11 @@ def List_Keluhan(User):
             Balasan.append(result[x][3])
     print("List Keluhan Anda:")
     print("No Tiket Keluhan\t| Isi Keluhan\t| ID CS\t\t| Balasan")
+    # a = PrettyTable(["No. Tiket", "No. Booking", "Asal", "Tujuan","Tanggal Keberangkatan","Harga"])
     for i in range(len(result)):
         print(No_tiket_Keluhan[i], "\t\t\t| ", Keluhan[i], "\t| ",ID_CS[i], "\t| ",Balasan[i])
+    # for y in result:
+    #     a.add_row(y)
     print("\nAnda akan diarahkan ke Menu Utama")
     pause()
     clear()

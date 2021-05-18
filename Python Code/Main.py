@@ -29,7 +29,7 @@ def Menu(User,Admin):
     while loop:
         try:
             #menu
-            if !(Admin):
+            if not (Admin):
                 Option = int(input("Pilih Menu di Bawah\n 1.Beli Tiket | 2.Lihat Tiket | 3.Ajukan Keluhan | 4.Lihat Tanggapan Keluhan | 5.Log Out\n> "))
             else :
                 Option = int(input("Pilih Menu di Bawah\n 1.Beli Tiket | 2.Lihat Tiket | 3.Ajukan Keluhan | 4.Lihat Tanggapan Keluhan | 5.Log Out | 6. Tampilkan Graph\n> "))
