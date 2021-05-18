@@ -140,13 +140,24 @@ def Ngulang(User):
 
 
 def pilihKota(ke):
-    print(f'Silahkan Pilih {ke} Destinasi Anda:')
-    i=1
-    for j in kota:
-        destinasi = j[0]
-        print(f'{i}. {destinasi}')
-        i=i+1
-    destinasi = int(input("> "))
+    pilih=1
+    while pilih:
+        print(f'Silahkan Pilih {ke} Destinasi Anda:')
+        i=1
+        for j in kota:
+            destinasi = j[0]
+            print(f'{i}. {destinasi}')
+            i=i+1
+        try:
+            destinasi = int(input("> "))
+            if destinasi<1 or destinasi>len(kota):
+                print("Pilihan Anda tidak tersedia di sistem kami")
+                pause()
+                clear()
+            else:
+                pilih=0
+        except ValueError:
+            print("Harap masukkan angak!")
     return destinasi-1
 
 def hitungHarga(A,B):

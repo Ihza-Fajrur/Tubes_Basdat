@@ -125,6 +125,7 @@ def Main():
             elif Option == 3:
                 loop = False
                 print("Sampai jumpa!")
+                exit()
             else:
                 print("Inputan salah!")
         except ValueError:
