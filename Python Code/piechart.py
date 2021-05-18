@@ -1,4 +1,3 @@
-import re
 import matplotlib.pyplot as plt
 import os
 import mysql.connector
