@@ -18,7 +18,7 @@ class Current_User:
     def __init__(self,Username):
         self.Username = Username
 
-def List_tiket(User):
+def List_tiket(User,Admin):
     order = f' select no_tiket,no_booking,asal,tujuan,tgl_keberangkatan,harga from penjualan_tiket natural join tiket where username = \'{User.Username}\''
     mycursor.execute(order)
     result = mycursor.fetchall()
@@ -30,15 +30,15 @@ def List_tiket(User):
     print("\nAnda akan diarahkan ke Menu Utama")
     pause()
     clear()
-    KeMenuUtama(User.Username)
+    KeMenuUtama(User.Username,Admin)
 
-def KeMenuUtama(Username):
+def KeMenuUtama(Username,Admin):
     from Main import DariLuar
-    DariLuar(Username)
+    DariLuar(Username,Admin)
 
-def Main(Username):
+def Main(Username,Admin):
     User = Current_User(Username)
-    List_tiket(User)
+    List_tiket(User,Admin)
 
 if __name__ == "__main__":
     clear()

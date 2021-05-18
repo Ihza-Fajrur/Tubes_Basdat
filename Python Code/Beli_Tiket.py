@@ -35,21 +35,22 @@ def Import_Ticketer_List():
         Ticketer_List.append(x[0])
     return random.choice(Ticketer_List)
 
-def Beli_Tiket(User):
+def Beli_Tiket(User,Admin):
     destinasi = True
     while destinasi:
         asal = pilihKota("asal")
         tujuan = pilihKota("tujuan")
-        tahun = input("\nTahun Keberangkatan Anda  : ")
-        bulan = input("1-12\nBulan Keberangkatan Anda  : ")
-        tgl = input("1-31  \nTanggal Keberangkatan Anda: ")
-        if len(tahun)==2:
-            tahun='20'+str(tahun)
+        print("Masukan Waktu Keberangkatan Anda")
+        tahun = input("\nTahun Keberangkatan Anda  (0000-9999): ")
+        bulan = input("\nBulan Keberangkatan Anda  (1-12): ")
+        tgl = input("\nTanggal Keberangkatan Anda (01-31): ")
+        if len(tahun)==4:
+            tahun=str(tahun)
         elif len(tahun)!=4:
             print("Inputan salah tahun salah")
             pause()
             clear()
-            Beli_Tiket(User)
+            Beli_Tiket(User,Admin)
         if len(bulan)==1:
             bulan='0'+str(bulan)
         if len(tgl)==1:
@@ -68,7 +69,7 @@ def Beli_Tiket(User):
                     clear()
                 elif option == 2:
                     loop_2 = False
-                    Ngulang(User)
+                    Ngulang(User,Admin)
                     clear()
                 else:
                     print("Inputan salah!")
@@ -117,16 +118,16 @@ def Beli_Tiket(User):
     clear()
     print("Anda Berhasil Membeli Tiket!")
     pause()
-    Ngulang(User)
+    Ngulang(User,Admin)
     #############################################
 
-def Ngulang(User):
+def Ngulang(User,Admin):
     try:
         clear()
         option = int(input("Apakah anda ingin membeli tiket lagi?\n1.Ya | 2.Tidak\n>"))
         if option == 1:
             clear()
-            Beli_Tiket(User)
+            Beli_Tiket(User,Admin)
         elif option == 2:
             pass
         else:
@@ -136,7 +137,7 @@ def Ngulang(User):
     print("\nAnda akan diarahkan ke Menu Utama")
     pause()
     clear()
-    KeMenuUtama(User.Username)
+    KeMenuUtama(User.Username,Admin)
 
 
 def pilihKota(ke):
@@ -157,7 +158,9 @@ def pilihKota(ke):
             else:
                 pilih=0
         except ValueError:
-            print("Harap masukkan angak!")
+            print("Harap masukkan angka!")
+            clear()
+        clear()
     return destinasi-1
 
 def hitungHarga(A,B):
@@ -173,13 +176,13 @@ def hitungHarga(A,B):
     jarak = int(jarak) #penggenapan
     return jarak*1000 #harga sebenar
 
-def Main(Username):
+def Main(Username,Admin):
     User = Current_User(Username)
-    Beli_Tiket(User)
+    Beli_Tiket(User,Admin)
 
-def KeMenuUtama(Username):
+def KeMenuUtama(Username,Admin):
     from Main import DariLuar
-    DariLuar(Username)
+    DariLuar(Username,Admin)
 
 if __name__ == "__main__":
     clear()

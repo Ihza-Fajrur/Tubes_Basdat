@@ -26,10 +26,19 @@ def Import_CS_List():
         CS_List.append(x[i])
     return random.choice(CS_List)
 
-def Isi_Keluhan(User):
+def Isi_Keluhan(User,Admin):
     loop_1 = True
     while loop_1:
-        temp_1 = str(random.randint(101000,101999))
+        loop_3 = True
+        while loop_3:
+            temp_1 = str(random.randint(101000,101999))
+            mycursor.execute("Select no_tiket_keluhan from keluhan")
+            result = mycursor.fetchall()
+            for x in result:
+                if x == temp_1:
+                    pass
+                elif not x == temp_1:
+                    loop_3 == False
         temp_2 = input("Harap Masukkan Pesan Keluhan:\n>")
         temp_3 = Import_CS_List()
         order = f'insert into keluhan (no_tiket_keluhan,Username,isi_keluhan,ID_CS) values (\'{temp_1}\',\'{User.Username}\',\'{temp_2}\',\'{temp_3}\')'
@@ -53,15 +62,15 @@ def Isi_Keluhan(User):
     print("\nAnda akan diarahkan ke Menu Utama")
     pause()
     clear()
-    KeMenuUtama(User.Username)
+    KeMenuUtama(User.Username,Admin)
 
-def Main(Username):
+def Main(Username,Admin):
     User = Current_User(Username)
-    Isi_Keluhan(User)
+    Isi_Keluhan(User,Admin)
 
-def KeMenuUtama(Username):
+def KeMenuUtama(Username,Admin):
     from Main import DariLuar
-    DariLuar(Username)
+    DariLuar(Username,Admin)
 
 if __name__ == "__main__":
     clear()

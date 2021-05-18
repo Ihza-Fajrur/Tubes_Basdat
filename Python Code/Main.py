@@ -4,6 +4,9 @@ import Beli_Tiket
 import Lihat_Tiket
 import Ajukan_Keluhan
 import Lihat_Keluhan
+import chart4
+import linechart4
+import piechart
 
 #Inisilasi
 clear = lambda: os.system('cls')
@@ -32,36 +35,53 @@ def Menu(User,Admin):
             if not (Admin):
                 Option = int(input("Pilih Menu di Bawah\n 1.Beli Tiket | 2.Lihat Tiket | 3.Ajukan Keluhan | 4.Lihat Tanggapan Keluhan | 5.Log Out\n> "))
             else :
-                Option = int(input("Pilih Menu di Bawah\n 1.Beli Tiket | 2.Lihat Tiket | 3.Ajukan Keluhan | 4.Lihat Tanggapan Keluhan | 5.Log Out | 6. Tampilkan Graph\n> "))
+                Option = int(input("Pilih Grafik data yang ingin ditampilkan\n\t1.Jumlah pembelian tiket tujuan tertentu\n\t2.Jumlah pembelian tiket asal tertentu\n\t3.Jumlah pembelian tiket pada bulan tertentu\n\t4.Log Out\n\t> "))
             #pilih menu
-            if Option == 1:
-                loop = False
-                clear()
-                Beli_Tiket.Main(User.Import_Username())
-            elif Option == 2:
-                loop = False
-                clear()
-                Lihat_Tiket.Main(User.Import_Username())
-            elif Option == 3:
-                loop = False
-                clear()
-                Ajukan_Keluhan.Main(User.Import_Username())
-            elif Option == 4:
-                loop = False
-                clear()
-                Lihat_Keluhan.Main(User.Import_Username())
-            elif Option == 5:
-                loop = False
-                print("Terima Kasih")
-                pause()
-                clear()
-                Main()
-            elif admin:
-                if Option == 6:
+            if not Admin:
+                if Option == 1:
                     loop = False
-                    Tampilkan_Graph()
-            else:
-                print("Inputan salah!")
+                    clear()
+                    Beli_Tiket.Main(User.Import_Username(),Admin)
+                elif Option == 2:
+                    loop = False
+                    clear()
+                    Lihat_Tiket.Main(User.Import_Username(),Admin)
+                elif Option == 3:
+                    loop = False
+                    clear()
+                    Ajukan_Keluhan.Main(User.Import_Username(),Admin)
+                elif Option == 4:
+                    loop = False
+                    clear()
+                    Lihat_Keluhan.Main(User.Import_Username(),Admin)
+                elif Option == 5:
+                    loop = False
+                    print("Terima Kasih")
+                    pause()
+                    clear()
+                    Main()
+                else:
+                    print("Inputan salah!")
+                    pause()
+            elif Admin:
+                if Option == 1:
+                    loop = False
+                    chart4.Main(User.Import_Username(),Admin)
+                if Option == 2:
+                    loop = False
+                    linechart4.Main(User.Import_Username(),Admin)
+                if Option == 3:
+                    loop = False
+                    piechart.Main(User.Import_Username(),Admin)
+                elif Option == 4:
+                    loop = False
+                    print("Terima Kasih")
+                    pause()
+                    clear()
+                    Main()
+                else:
+                    print("Inputan salah!")
+                    clear()
         except ValueError:
             print("Harap masukkan integer")
 
@@ -74,23 +94,30 @@ def Login():
         Password = str(input("\tPassword\t: "))
         if not (Username and Password):
             print("Username dan Password tidak dapat dikosongkan")
-        admin = 0
-        mycursor.execute("Select password from pembeli where Username  = '" + Username + "\'")
-        result = mycursor.fetchall()
-        if not result:
-            mycursor.execute("Select Id_petugas from petugas where Nama_Petugas  = '" + Username + "\'")
+        Admin = 0
+        try:
+            mycursor.execute("Select password from pembeli where Username  = '" + Username + "\'")
             result = mycursor.fetchall()
-            admin = 1
-        result = (result[0])[0]
-        if result == Password:
-            loop = False
-            print("Anda Berhasil Login!")
-            User = Current_User(Username)
+            if not result:
+                mycursor.execute("Select Id_petugas from petugas where Nama_Petugas  = '" + Username + "\'")
+                result = mycursor.fetchall()
+                Admin = 1
+
+            if result[0][0] == Password:
+                loop = False
+                print("Anda Berhasil Login!")
+                User = Current_User(Username)
+                pause()
+                clear()
+                Menu(User,Admin)
+            else:
+                print("Username atau Password Salah!")
+                pause()
+                clear()
+        except IndexError:
+            print("Username Salah!")
             pause()
             clear()
-            Menu(User,admin)
-        else:
-            print("Username atau Password Salah!")
 
 def Sign_Up():
     loop = True
@@ -143,10 +170,10 @@ def Main():
         except ValueError:
             print("Harap masukkan integer")
 
-def DariLuar(Username):
+def DariLuar(Username,Admin):
     User = Current_User(Username)
     clear()
-    Menu(User)
+    Menu(User,Admin)
 
 if __name__ == "__main__":
     clear()
