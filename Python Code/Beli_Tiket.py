@@ -170,9 +170,9 @@ def hitungHarga(A,B):
     By = kota[B][2]
     X = Ax-Bx
     Y = Ay-By
-    jarak = (A**2) + (B**2)
+    jarak = (X**2) + (Y**2)
     jarak = jarak**(1.0/2)
-    jarak = jarak*290 #kaliin harga
+    jarak = jarak*117.7 #kaliin harga
     jarak = int(jarak) #penggenapan
     return jarak*1000 #harga sebenar
 
@@ -186,4 +186,4 @@ def KeMenuUtama(Username,Admin):
 
 if __name__ == "__main__":
     clear()
-    Main("Ihza")
+    Main("Ihza",0)
