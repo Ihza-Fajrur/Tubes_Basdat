@@ -37,6 +37,7 @@ def Cancel_Tiket():
         Cancel_Tiket()
 
 def List_tiket(User,Admin):
+    print(User.Username)
     order = f' select no_tiket,no_booking,asal,tujuan,tgl_keberangkatan,harga from penjualan_tiket natural join tiket where username = \'{User.Username}\''
     mycursor.execute(order)
     result = mycursor.fetchall()
@@ -48,7 +49,6 @@ def List_tiket(User,Admin):
     try:
         option =  int(input("Apakah anda ingin membatalkan tiket?\n1.Ya | 2.Tidak\n>"))
         if option == 1:
-            clear()
             Cancel_Tiket()
         elif option == 2:
             pass
@@ -78,4 +78,4 @@ def Main(Username,Admin):
 
 if __name__ == "__main__":
     clear()
-    Main("Ihza")
+    Main("Redoqx",0)
