@@ -2,6 +2,7 @@ import os
 import mysql.connector
 import random
 from prettytable import PrettyTable
+import subprocess
 
 #Inisilasi
 clear = lambda: os.system('cls')
@@ -45,7 +46,10 @@ def List_tiket(User,Admin):
     x = PrettyTable(["No. Tiket", "No. Booking", "Asal", "Tujuan","Tanggal Keberangkatan","Harga"])
     for j in result:
         x.add_row(j)
+    output = subprocess.getoutput("ls -l")
     print(x)
+    print(output)
+
     try:
         option =  int(input("Apakah anda ingin membatalkan tiket?\n1.Ya | 2.Tidak\n>"))
         if option == 1:
