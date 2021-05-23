@@ -4,7 +4,7 @@
 block_cipher = None
 
 
-a = Analysis(['Main.py'],
+a = Analysis(['main.py'],
              pathex=['C:\\Users\\acer\\OneDrive\\Desktop\\TUBES_BASDAT\\Tubes_Basdat\\Python Code'],
              binaries=[],
              datas=[],
@@ -24,7 +24,7 @@ exe = EXE(pyz,
           a.zipfiles,
           a.datas,
           [],
-          name='Main',
+          name='main',
           debug=False,
           bootloader_ignore_signals=False,
           strip=False,

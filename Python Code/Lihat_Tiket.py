@@ -39,11 +39,21 @@ def Cancel_Tiket():
 
 def List_tiket(User,Admin):
     print(User.Username)
-    order = f' select no_tiket,no_booking,asal,tujuan,tgl_keberangkatan,harga from penjualan_tiket natural join tiket where username = \'{User.Username}\''
+    order = f'select penjualan_tiket.username,tiket.no_tiket,tiket.no_booking,tiket.asal,tiket.tujuan,tiket.tgl_keberangkatan,pembeli.kontak '
+    order = order + f'from tiket LEFT JOIN penjualan_tiket ON tiket.no_penjualan = penjualan_tiket.no_penjualan '
+    order = order + f'LEFT JOIN pembeli ON penjualan_tiket.Username = pembeli.Username '
+    order = order + f'where `penjualan_tiket`.`Username` = \'{User.Username}\''
     mycursor.execute(order)
     result = mycursor.fetchall()
 
-    x = PrettyTable(["No. Tiket", "No. Booking", "Asal", "Tujuan","Tanggal Keberangkatan","Harga"])
+    #keluara percobaan
+    # for i in range(len(result)):
+    #     keluar = f'Username\t  : {str(result[i][0])}\nno_tiket\t  : {str(result[i][1])}\nno_booking\t  : {str(result[i][2])}'
+    #     keluar = keluar + f'\nasal\t\t  : {str(result[i][3])}\ntujuan\t\t  : {str(result[i][4])}\ntgl_keberangkatan : {str(result[i][5])}'
+    #     keluar = keluar + f'\nkontak\t\t  : {str(result[i][6])}\n'
+    #     print(keluar)
+
+    x = PrettyTable(['username','no_tiket','no_booking','asal','tujuan','tgl_keberangkatan','kontak'])
     for j in result:
         x.add_row(j)
     output = subprocess.getoutput("ls -l")
@@ -82,4 +92,4 @@ def Main(Username,Admin):
 
 if __name__ == "__main__":
     clear()
-    Main("Redoqx",0)
+    Main("Ihza",0)
