@@ -39,41 +39,6 @@ def List_Keluhan(User,Admin):
     for y in result:
         a.add_row(y)
     print(a)
-    # milih=1
-    # while milih:
-    #     try:
-    #         option =  int(input("Apakah anda ingin melihat balasan keluhan?\n1.Ya | 2.Tidak\n>"))
-    #         if option == 1:
-    #             milih=0
-    #         elif option == 2:
-    #             print("\nAnda akan diarahkan ke Menu Utama")
-    #             pause()
-    #             clear()
-    #             KeMenuUtama(User.Username,Admin)
-    #         else:
-    #             print("Pilihan Anda tidak tersedia!")
-    #             pause()
-    #             clear()
-    #             List_Keluhan(User,Admin)
-    #
-    #         try:
-    #             print(order)
-    #             a = input("Silahkan masukkan No. Tiket Keluhan yang ingin anda lihat balasannya\n>")
-    #             order = order + f' and Balasan > (select Balasan from keluhan where no_tiket_keluhan = \'{a}\')'
-    #             mycursor.execute(order)
-    #             result = mycursor.fetchall()
-    #             clear()
-    #             print("Balasannya:")
-    #             print(result)
-    #         except mysql.connector.Error as error:
-    #             print(f'Gagal Menampilkan data\nError Code\n{error}')
-    #             pause()
-    #
-    #     except ValueError:
-    #             print("Harap masukkan integer!")
-    #             pause()
-    #             clear()
-    #             ist_Keluhan(User,Admin)
     print("\nAnda akan diarahkan ke Menu Utama")
     pause()
     clear()
